@@ -1,8 +1,10 @@
-export function bubbleSort(a: Int32Array): Int32Array {
+export function bubbleSort<T>(a: T[], compare?: (a: T, b: T) => number): T[] {
   const n = a.length;
+  const cmp = compare || ((x: T, y: T):number => x < y ? -1 : x > y ? 1 : 0);
+
   for (let i = 0; i < n - 1; i++) {
     for (let j = 0; j < n - i - 1; j++) {
-      if (a[j] > a[j + 1]) {
+      if (cmp(a[j], a[j + 1]) > 0) {
         [a[j], a[j + 1]] = [a[j + 1], a[j]];
       }
     }
